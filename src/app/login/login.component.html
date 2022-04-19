@@ -1,0 +1,24 @@
+<div class="bg-light-blue md:p-16 p-8 h-full w-full flex justify-center items-center">
+    <div class="rounded md:w-1/2 w-full bg-white p-8">
+        <div class="text-2xl font-bold text-center">Inicio de sesión</div>
+        <mat-form-field class="w-full mt-4" appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput placeholder="Ex. Raul Galindo">
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <div class="flex justify-center items-center flex-col">
+            <div class="md:w-1/4 w-1/2"> 
+                <button class="w-full mb-4" mat-raised-button color="primary" (click)="login()">Ingresar</button>
+            </div>
+            <div class="pt-4">
+                <button [routerLink]="['/recover']" mat-button>¿Olvidó su contraseña?</button>
+            </div>
+        </div>
+    </div>
+</div>
