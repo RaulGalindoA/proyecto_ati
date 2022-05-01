@@ -1,25 +1,25 @@
 <div class="px-8 py-2 bg-light-blue">
     <div class="bg-white p-4 mb-4 mt-4 rounded">
-        <div class="flex flex-row">
+        <div class="flex md:flex-row flex-col">
             <mat-form-field class="w-full mt-4" appearance="outline">
                 <mat-label>Filtro 1</mat-label>
                 <input matInput placeholder="Ex. Raul Galindo">
             </mat-form-field>
-            <mat-form-field class="w-full mt-4 ml-4" appearance="outline">
+            <mat-form-field class="w-full mt-4 md:ml-4" appearance="outline">
                 <mat-label>Filtro 2</mat-label>
                 <input matInput placeholder="Ex. Raul Galindo">
             </mat-form-field>
-            <mat-form-field class="w-full mt-4 ml-4" appearance="outline">
+            <mat-form-field class="w-full mt-4 md:ml-4" appearance="outline">
                 <mat-label>Filtro 3</mat-label>
                 <input matInput placeholder="Ex. Raul Galindo">
             </mat-form-field>
         </div>
-        <div class="w-full flex flex-row justify-end items-center">
+        <div class="w-full flex flex-row md:justify-end justify-between items-center">
             <div class="mr-4">
                 <button mat-raised-button>Limpiar</button>
             </div>
             <div class="mr-4">
-                <button mat-raised-button color="primary">Buscar</button>
+                <button mat-raised-button class="bg-dark-blue text-white">Buscar</button>
             </div>
             <div>
                 <button (click)="newPersonal()" style="background-color: #04B14F;" mat-mini-fab aria-label="Example icon button with a menu icon">
@@ -57,6 +57,11 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+        </mat-paginator>
     </div>
 
 </div>

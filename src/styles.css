@@ -9,6 +9,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #297DF6;
 }
 
+.light-blue {
+    color: #297DF6;
+}
+
+.bg-dark-blue {
+    background-color: #0D2740;
+}
+
+.text-dark-blue {
+    color: #0D2740;
+}
+
+.bg-light-gray {
+    background-color: #F0F0F0;
+}
+
 .bg-blue {
     color: #297DF6;
 }

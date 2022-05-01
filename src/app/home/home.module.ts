@@ -7,19 +7,28 @@ import { MaterialModule } from '../material/material/material.module';
 import { InfraestructureComponent } from './infraestructure/infraestructure.component';
 import { PersonalComponent } from './personal/personal.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
+
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
     HomeComponent,
     InfraestructureComponent,
     PersonalComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    MyProfileComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule, 
-    MaterialModule
+    MaterialModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ]
 })
 export class HomeModule { }

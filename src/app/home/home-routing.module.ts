@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { InfraestructureComponent } from './infraestructure/infraestructure.component';
 import { PersonalComponent } from './personal/personal.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -19,8 +20,17 @@ const routes: Routes = [
         component: PersonalComponent
       },
       {
-        path: 'welcome',
+        path: 'landing',
         component: WelcomeComponent
+      },
+      {
+        path: 'profile',
+        component: MyProfileComponent
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'landing'
       },
       {
         path: '**',

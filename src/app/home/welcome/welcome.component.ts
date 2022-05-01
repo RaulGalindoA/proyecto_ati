@@ -10,7 +10,7 @@ import { AnimationItem } from 'lottie-web';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor() { }
 
   optionsSuccess: AnimationOptions = {
     path: '/assets/lottie/welcome.json',

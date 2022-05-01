@@ -14,10 +14,10 @@
         </mat-form-field>
         <div class="flex justify-center items-center flex-col">
             <div class="md:w-1/4 w-1/2"> 
-                <button class="w-full mb-4" mat-raised-button color="primary" (click)="login()">Ingresar</button>
+                <button class="w-full mb-4 bg-dark-blue text-white" mat-raised-button (click)="login()">Ingresar</button>
             </div>
             <div class="pt-4">
-                <button [routerLink]="['/recover']" mat-button>¿Olvidó su contraseña?</button>
+                <button class="light-blue" [routerLink]="['/recover']" mat-button>¿Olvidó su contraseña?</button>
             </div>
         </div>
     </div>
