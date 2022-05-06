@@ -2,42 +2,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .bg-light-blue {
-    background-color: #297DF6;
+  background-color: #297df6;
 }
 
 .light-blue {
-    color: #297DF6;
+  color: #297df6;
 }
 
 .bg-dark-blue {
-    background-color: #0D2740;
+  background-color: #0d2740;
 }
 
 .text-dark-blue {
-    color: #0D2740;
+  color: #0d2740;
 }
 
 .bg-light-gray {
-    background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .bg-blue {
-    color: #297DF6;
+  color: #297df6;
 }
 
 .mat-icon {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
-td, th {
-    text-align: center !important;
-    vertical-align: middle !important;
+td,
+th {
+  text-align: center !important;
+  vertical-align: middle !important;
 }
 
 .mat-sort-header-container {
-    justify-content: center !important;
+  justify-content: center !important;
+}
+
+.active-catalogue {
+  background-color: #297df6;
+  color: white !important;
+}
+
+.p-input {
+  padding-bottom: 8px;
+}
+
+.b-editar {
+  color: white !important;
+  background-color: rgb(251 191 36);
+}
+
+.b-eliminar {
+  color: white !important;
+  background-color: rgb(225, 29, 72);
+}
+
+mat-form-field.no-padding .mat-form-field-wrapper {
+  padding: 0;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.mat-select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+form.submitted .ng-invalid {
+  border: 1px solid #f00;
+}
+
+.form-control.ng-valid {
+  border-color: #ccc !important;
 }

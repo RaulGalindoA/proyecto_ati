@@ -20,6 +20,10 @@ const routes: Routes = [
         component: PersonalComponent
       },
       {
+        path: 'catalogues',
+        loadChildren: () => import('./catalogues/catalogues.module').then(m => m.CataloguesModule)
+      },
+      {
         path: 'landing',
         component: WelcomeComponent
       },

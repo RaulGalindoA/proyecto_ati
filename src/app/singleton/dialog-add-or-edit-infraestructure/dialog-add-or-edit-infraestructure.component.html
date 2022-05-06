@@ -12,11 +12,10 @@
         <mat-label>Encargado</mat-label>
         <mat-select>
           <mat-option
-            *ngFor="let persona of personas"
-            value="{{ persona }}"
-            >{{ persona }}
+            *ngFor="let staff of staffs"
+            value="{{ staff.id }}"
+            >{{ staff.nombre }}
             </mat-option>
-          <mat-option value="two">Second option</mat-option>
         </mat-select>
       </mat-form-field>
   </div>
@@ -26,11 +25,10 @@
       <mat-label>Tipo de infraestructura</mat-label>
       <mat-select>
         <mat-option
-          *ngFor="let infraestructure of infraestructures"
-          value="{{ infraestructure }}"
-          >{{ infraestructure }}</mat-option
+          *ngFor="let area of areas"
+          value="{{ area.id }}"
+          >{{ area.nombre }}</mat-option
         >
-        <mat-option value="two">Second option</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -39,13 +37,25 @@
     <div class="w-1/2 mr-3">
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Modelo</mat-label>
-        <input matInput placeholder="Ex. RTX 3090 ti" />
+        <mat-select>
+          <mat-option
+            *ngFor="let modelo of modelos"
+            value="{{ modelo.id }}"
+            >{{ modelo.nombre }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
     </div>
     <div class="w-1/2">
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Marca</mat-label>
-        <input matInput placeholder="Ex. NVIDIA" />
+        <mat-select>
+          <mat-option
+            *ngFor="let marca of marcas"
+            value="{{ marca.id }}"
+            >{{ marca.nombre }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
     </div>
   </div>

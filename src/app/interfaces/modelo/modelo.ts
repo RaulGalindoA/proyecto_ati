@@ -1,6 +1,8 @@
 import { ModeloPivot } from './modelo-pivot';
 export interface Modelo {
-    id:     number;
+    id?:     number;
+    marca?: number;
     nombre: string;
-    pivot:  ModeloPivot;
+    pivot?:  ModeloPivot;
+    active?: boolean;
 }

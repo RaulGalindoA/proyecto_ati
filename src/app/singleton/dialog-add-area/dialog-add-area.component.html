@@ -1,0 +1,25 @@
+<h1> {{ data ? 'Editar': 'Nuevo' }} modelo</h1>
+<form (ngSubmit)="guardarArea()" autocomplete="off" [formGroup]="miFormulario">
+  <div class="flex flex-col">
+    <div class="w-full flex flex-col">
+      <mat-form-field class="w-full no-padding" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" matInput placeholder="Ex. Lenovo" />
+      </mat-form-field>
+        <span class="p-input text-red-500" [ngClass]="campoEsValido('nombre') ? 'visible': 'invisible'"
+        >
+          Este campo es obligatorio
+        </span>
+    </div>
+    <div class="flex flex-row justify-between">
+      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        Agregar
+      </button>
+    </div>
+  </div>
+</form>

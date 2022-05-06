@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Staff } from 'src/app/interfaces/staff/staff';
+import { MainService } from '../../services/main.service';
+import { Marca } from '../../interfaces/marca';
+import { Modelo } from '../../interfaces/modelo/modelo';
+import { Area } from '../../interfaces/area/area';
 
 @Component({
   selector: 'app-dialog-add-or-edit-infraestructure',
@@ -8,26 +13,34 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DialogAddOrEditInfraestructureComponent implements OnInit {
 
-  infraestructures = [ 
-    "Red eléctrica",
-    "Red de datos",
-    "Sistema de enfriamiento",
-    "Hardware",
-    "Software",
-    "Sistema de extintores",
-   ]
+  marcas?: Marca[];
+  modelos?: Modelo[];
+  areas?: Area[];
+  staffs?: Staff[];
 
-   personas = [
-     'Raúl',
-     'Paloma',
-     'Lizbeth',
-     'Elon Musk', 
-     'René'
-   ]
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private mainService: MainService, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    this.mainService.getMarcas().subscribe(
+      resp => {
+        this.marcas = resp;
+      }
+    )
+    this.mainService.getAreas().subscribe(
+      resp => {
+        this.areas = resp;
+      }
+    )
+    this.mainService.getModelos().subscribe(
+      resp => {
+        this.modelos = resp;
+      }
+    )
+    this.mainService.getStaffs().subscribe(
+      resp => {
+        this.staffs = resp;
+      }
+    )
   }
 
 }

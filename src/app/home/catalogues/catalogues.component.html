@@ -1,0 +1,45 @@
+<div class="px-8 py-2 bg-light-blue min-h-screen h-fit">
+  <div class="bg-white p-4 mb-4 mt-16 rounded h-3/4">
+    <div class="flex flex-row">
+      <div class="w-1/4 flex items-start justify-center pt-10">
+        <mat-selection-list class="w-full">
+          <mat-list-item
+            [routerLink]="['/home/catalogues/areas']"
+            routerLinkActive="active-catalogue"
+            role="listitem"
+            class="cursor-pointer"
+            >Áreas</mat-list-item
+          >
+          <mat-divider></mat-divider>
+          <mat-list-item
+            [routerLink]="['/home/catalogues/categorias']"
+            routerLinkActive="active-catalogue"
+            role="listitem"
+            class="cursor-pointer"
+            >Categorías</mat-list-item
+          >
+          <mat-divider></mat-divider>
+          <mat-list-item
+            [routerLink]="['/home/catalogues/marcas']"
+            routerLinkActive="active-catalogue"
+            role="listitem"
+            class="cursor-pointer"
+            >Marcas</mat-list-item
+          >
+          <mat-divider></mat-divider>
+          <mat-list-item
+            [routerLink]="['/home/catalogues/modelos']"
+            routerLinkActive="active-catalogue"
+            role="listitem"
+            class="cursor-pointer"
+            >Modelos</mat-list-item
+          >
+          <mat-divider></mat-divider>
+        </mat-selection-list>
+      </div>
+      <div class="w-3/4 p-8">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

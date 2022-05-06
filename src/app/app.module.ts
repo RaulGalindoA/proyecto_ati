@@ -13,6 +13,12 @@ import { DialogResponseComponent } from './singleton/dialog-response/dialog-resp
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { DialogAddOrEditPersonalComponent } from './singleton/dialog-add-or-edit-personal/dialog-add-or-edit-personal.component';
+import { DialogAddMarcaComponent } from './singleton/dialog-add-marca/dialog-add-marca.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogConfirmComponent } from './singleton/dialog-confirm/dialog-confirm.component';
+import { DialogAddAreaComponent } from './singleton/dialog-add-area/dialog-add-area.component';
+import { DialogAddModeloComponent } from './singleton/dialog-add-modelo/dialog-add-modelo.component';
+import { DialogAddCategoriaComponent } from './singleton/dialog-add-categoria/dialog-add-categoria.component';
 
 export function playerFactory() {
   return player;
@@ -26,6 +32,11 @@ export function playerFactory() {
     RecoverPasswordComponent,
     DialogResponseComponent,
     DialogAddOrEditPersonalComponent,
+    DialogAddMarcaComponent,
+    DialogConfirmComponent,
+    DialogAddAreaComponent,
+    DialogAddModeloComponent,
+    DialogAddCategoriaComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +44,8 @@ export function playerFactory() {
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     LottieModule.forRoot({ player: playerFactory })
   ],
   providers: [],

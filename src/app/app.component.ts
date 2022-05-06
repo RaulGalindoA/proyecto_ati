@@ -11,13 +11,6 @@ export class AppComponent {
 
   texto: string = '';
 
-  constructor(private mainService: MainService){
-    this.mainService.testService().subscribe(
-      resp => {
-        console.log(resp);
-        this.texto = resp;
-      }
-    )
-  }
+  constructor(){}
 
 }

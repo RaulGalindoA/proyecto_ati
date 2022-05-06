@@ -1,3 +1,4 @@
+<div class="h-screen max-h-full">
 <mat-toolbar>
     <div class="flex flex-row w-full">
         <div class="flex flex-row">
@@ -35,7 +36,9 @@
                     Sistema de extintores
                 </button>
             </mat-menu>
-
+            <button [routerLink]="['/home/catalogues']" matTooltip="Catálogos" mat-button color="primary">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">library_books</mat-icon>
+            </button>
             
         </div>
         <div class="ml-auto flex flex-row items-center justify-center">
@@ -62,4 +65,5 @@
     </div>
     
 </mat-toolbar>
-<router-outlet class></router-outlet>
+<router-outlet></router-outlet>
+</div>

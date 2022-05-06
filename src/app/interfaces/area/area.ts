@@ -1,6 +1,7 @@
 import { AreaPivot } from './area-pivot';
 export interface Area {
-    id:     number;
+    id?:     number;
     nombre: string;
-    pivot:  AreaPivot;
+    active?: boolean;
+    pivot?:  AreaPivot;
 }

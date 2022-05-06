@@ -1,0 +1,13 @@
+<div class="font-bold text-2xl">Confirmación:</div>
+<div class="mt-4 text-xl text-center" [innerHTML]="data"></div>
+<div class="flex justify-center">
+  <ng-lottie
+    class="w-2/4"
+    [options]="options"
+    (animationCreated)="animationCreated($event)"
+  ></ng-lottie>
+</div>
+<div class="flex flex-row justify-between" >
+    <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="cerrar(true)">Confirmar</button>
+</div>
