@@ -7,7 +7,7 @@
         </mat-form-field>
         <mat-form-field class="w-full" appearance="outline">
             <mat-label>Enter your password</mat-label>
-            <input [(ngModel)]="usuario.password" matInput [type]="hide ? 'password' : 'text'">
+            <input (keydown.enter)="login()" [(ngModel)]="usuario.password" matInput [type]="hide ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -16,9 +16,9 @@
             <div class="md:w-1/4 w-1/2"> 
                 <button class="w-full mb-4 bg-dark-blue text-white" mat-raised-button (click)="login()">Ingresar</button>
             </div>
-            <div class="pt-4">
+            <!-- <div class="pt-4">
                 <button class="light-blue" [routerLink]="['/recover']" mat-button>¿Olvidó su contraseña?</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

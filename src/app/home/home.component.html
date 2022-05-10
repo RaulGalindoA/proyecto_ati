@@ -23,8 +23,8 @@
           >
         </button>
         <button *ngIf="admin"
-          [matMenuTriggerFor]="menu"
           matTooltip="Infraestructura"
+          [routerLink]="['/home/infraestructure']"
           mat-button
           color="primary"
         >
@@ -32,80 +32,7 @@
             >apartment</mat-icon
           >
         </button>
-        <mat-menu #menu="matMenu" class="flex flex-col">
-          <button
-            class="align-middle"
-            [routerLink]="['/home/infraestructure']"
-            [queryParams]="{ type : 'electrical' }"
-            mat-menu-item
-            color="primary"
-          >
-            <mat-icon aria-hidden="false" aria-label="Example home icon"
-              >bolt</mat-icon
-            >
-            Red eléctrica
-          </button>
-          <button
-            class="align-middle"
-            [routerLink]="['/home/infraestructure']"
-            [queryParams]="{ type : 'network' }"
-            mat-menu-item
-            color="primary"
-          >
-            <mat-icon aria-hidden="false" aria-label="Example home icon"
-              >share</mat-icon
-            >
-            Red de datos
-          </button>
-          <button
-            class="align-middle"
-            [routerLink]="['/home/infraestructure']"
-            [queryParams]="{ type : 'cooling' }"
-            mat-menu-item
-            color="primary"
-          >
-            <mat-icon aria-hidden="false" aria-label="Example home icon"
-              >heat_pump</mat-icon
-            >
-            Sistema de enfriamiento
-          </button>
-          <button
-            class="align-middle"
-            [routerLink]="['/home/infraestructure']"
-            [queryParams]="{ type : 'hardware' }"
-            mat-menu-item
-            color="primary"
-          >
-            <mat-icon aria-hidden="false" aria-label="Example home icon"
-              >desktop_windows</mat-icon
-            >
-            Hardware
-          </button>
-          <button
-            class="align-middle"
-            [routerLink]="['/home/infraestructure']"
-            [queryParams]="{ type : 'software' }"
-            mat-menu-item
-            color="primary"
-          >
-            <mat-icon aria-hidden="false" aria-label="Example home icon">
-              terminal
-            </mat-icon>
-            Software
-          </button>
-          <button
-            class="align-middle"
-            [routerLink]="['/home/infraestructure']"
-            [queryParams]="{ type : 'extinguisher' }"
-            mat-menu-item
-            color="primary"
-          >
-            <mat-icon aria-hidden="false" aria-label="Example home icon"
-              >fire_extinguisher</mat-icon
-            >
-            Sistema de extintores
-          </button>
-        </mat-menu>
+        
         <button *ngIf="admin"
           [routerLink]="['/home/catalogues']"
           matTooltip="Catálogos"
@@ -116,7 +43,7 @@
             >library_books</mat-icon
           >
         </button>
-        <button *ngIf="!admin"
+        <button
           [routerLink]="['/home/mis_equipos']"
           matTooltip="Mis equipos"
           mat-button

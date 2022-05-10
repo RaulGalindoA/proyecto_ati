@@ -100,6 +100,13 @@ export class UsersComponent implements OnInit {
             data: dialogData
           });
           this.refreshUsers();
+        } else {
+          dialogData.message = result.detail.email;
+          this.dialog.open(DialogResponseComponent, {
+            width: '500px',
+            data: dialogData
+          });
+          this.refreshUsers();
         }
       }
       console.log('resultado')

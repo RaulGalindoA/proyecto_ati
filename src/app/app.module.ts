@@ -21,6 +21,7 @@ import { DialogAddModeloComponent } from './singleton/dialog-add-modelo/dialog-a
 import { DialogAddCategoriaComponent } from './singleton/dialog-add-categoria/dialog-add-categoria.component';
 import { DialogAddUserComponent } from './singleton/dialog-add-user/dialog-add-user.component';
 import { DialogEditPasswordComponent } from './singleton/dialog-edit-password/dialog-edit-password.component';
+import { DialogEditOwnEquipoComponent } from './singleton/dialog-edit-own-equipo/dialog-edit-own-equipo.component';
 
 export function playerFactory() {
   return player;
@@ -41,6 +42,7 @@ export function playerFactory() {
     DialogAddCategoriaComponent,
     DialogAddUserComponent,
     DialogEditPasswordComponent,
+    DialogEditOwnEquipoComponent,
   ],
   imports: [
     BrowserModule,

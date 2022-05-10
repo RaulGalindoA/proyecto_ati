@@ -48,7 +48,7 @@ export class DialogAddOrEditPersonalComponent implements OnInit {
     mail:       [, [Validators.required, Validators.pattern(this.validatorService.emailPattern),]],
     puesto:     [, [Validators.required]],
     rfc:        [, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
-    curp:       [, [Validators.required]],
+    curp:       [, [Validators.required, Validators.minLength(18), Validators.maxLength(18)]],
     numstaff:   [, [Validators.required]],
     user_id:    [, [Validators.required]]
   });
@@ -133,6 +133,18 @@ export class DialogAddOrEditPersonalComponent implements OnInit {
       return 'Número es obligatorio'
     } else if (errors?.['pattern']) {
       return 'El valor ingresado no es un número'
+    }
+    return ''
+  }
+
+  getCurpMsg(): string{
+    const errors = this.miFormulario.get('rfc')?.errors;
+    if ( errors?.['required'] ){
+      return 'CURP es obligatorio'
+    } else if (errors?.['minlength']) {
+      return 'CURP debe tener 18 carácteres exactamente'
+    } else if (errors?.['maxlength']) {
+      return 'CURP debe tener 18 carácteres exactamente'
     }
     return ''
   }

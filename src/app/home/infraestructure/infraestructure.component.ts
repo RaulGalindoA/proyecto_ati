@@ -195,13 +195,13 @@ export class InfraestructureComponent implements OnInit {
 
   activateFilters() {
       var dateString = ''  
-      if(  this.startFilter && this.startFilter.trim() != '' ) {
+      if(  this.startFilter && this.startFilter != '' ) {
         var date = new Date(this.startFilter)
         dateString = date.toISOString().split('T')[0]
       }
       var dateString2 = ''
-      if ( this.endFilter && this.endFilter.trim() != '' ){
-        var date2 = new Date(this.startFilter)
+      if ( this.endFilter && this.endFilter != '' ){
+        var date2 = new Date(this.endFilter)
         dateString2 = date2.toISOString().split('T')[0]
       }
 

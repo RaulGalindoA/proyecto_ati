@@ -6,7 +6,7 @@ export interface Equipo {
     id?:          number;
     nombre?:      string;
     num_serie?:   string;
-    ultimo_mant?: Date;
+    ultimo_mant?: Date | string;
     detalles?:    string;
     capacidad?:   string;
     unidad?:      string;

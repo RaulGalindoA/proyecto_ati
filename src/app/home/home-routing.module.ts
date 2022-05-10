@@ -7,6 +7,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { UsersComponent } from './users/users.component';
 import { MisEquiposComponent } from './mis-equipos/mis-equipos.component';
+import { AdminGuard } from '../services/admin.guard';
 
 const routes: Routes = [
   {
@@ -14,14 +15,17 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
+        canActivate: [AdminGuard],
         path: 'infraestructure', 
         component: InfraestructureComponent
       },
       {
+        canActivate: [AdminGuard],
         path: 'personal', 
         component: PersonalComponent
       },
       {
+        canActivate: [AdminGuard],
         path: 'catalogues',
         loadChildren: () => import('./catalogues/catalogues.module').then(m => m.CataloguesModule)
       },
@@ -34,6 +38,7 @@ const routes: Routes = [
         component: MyProfileComponent
       },
       {
+        canActivate: [AdminGuard],
         path: 'users',
         component: UsersComponent
       },

@@ -1,4 +1,4 @@
-<h1>{{ data ? "Nuevo" : "Editar" }} personal</h1>
+<h1>{{ data ? "Editar" : "Nuevo" }} personal</h1>
 <mat-dialog-content class="flex flex-col overflow-auto">
   <form
     autocomplete="off"
@@ -161,8 +161,8 @@
           class="mb-1 text-red-500"
           [ngClass]="campoEsValido('curp') ? 'visible' : 'invisible'"
         >
-          Este campo es obligatorio
-        </span>
+        {{ getCurpMsg ? getCurpMsg : "&nbsp" }}
+      </span>
       </div>
       <div class="flex flex-col w-1/2 mr-3">
         <mat-form-field class="w-full no-padding" appearance="outline">

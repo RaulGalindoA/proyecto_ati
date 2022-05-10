@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Staff } from '../../interfaces/staff/staff';
+import { MainService } from '../../services/main.service';
+import { LocalService } from '../../services/local.service';
+import { AnimationOptions } from 'ngx-lottie';
+import { AnimationItem } from 'lottie-web';
 
 @Component({
   selector: 'app-my-profile',
@@ -7,9 +12,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyProfileComponent implements OnInit {
 
-  constructor() { }
+  staff!: Staff;
+  nivel: string = '';
+
+  constructor(private mainService: MainService, private localService: LocalService) { }
 
   ngOnInit(): void {
+    this.mainService.getStaff( this.localService.getJsonValue('token').user.id ).subscribe(
+      resp => {
+        this.staff = resp[0]
+        this.nivel = resp[0].user?.nivel!
+        console.log(resp[0]);
+      }
+    )
   }
+
+  options: AnimationOptions = {
+    path: '/assets/lottie/notfound.json',
+  }
+
+  animationCreated(animationItem: AnimationItem): void {}
 
 }

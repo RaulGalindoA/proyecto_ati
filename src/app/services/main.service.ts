@@ -50,14 +50,33 @@ export class MainService {
 
     return this.http.get<Equipo[]>(this.baseUrl + 'infra/view', {params});
   }
+  getEquiposByStaff( 
+    user: number,
+    modelo?: number,
+    marca?: number,
+    tipo?: number,
+    area?: number,
+    nombre?: string,
+    nserie?: string,
+    start?: string,
+    end?: string,
+    ): Observable<Equipo[]> {
+    let params = new HttpParams().set('user', user);
+    if( modelo && modelo != 0  ) params = params.set('modelo', modelo )
+    if( marca && marca != 0  ) params = params.set('marca', marca )
+    if( tipo && tipo != 0  ) params = params.set('tipo', tipo )
+    if( area && area != 0  ) params = params.set('area', area )
+    if( nombre && nombre.trim() != ''  ) params = params.set('nombre', nombre )
+    if( nserie && nserie.trim() != ''  ) params = params.set('num_serie', nserie )
+    if( start && start.trim() != ''  ) params = params.set('start_date', start )
+    if( end && end.trim() != ''  ) params = params.set('end_date', end )
+    return this.http.get<Equipo[]>(this.baseUrl + `infra/staff/view`, {params});
+  }
 
   getEquiposByCategory(id: string): Observable<Equipo[]> {
     return this.http.get<Equipo[]>(this.baseUrl + 'infra/cat/1');
   }
 
-  getEquiposByStaff( id: string ): Observable<Equipo> {
-    return this.http.get<Equipo>(this.baseUrl + `api/infra/staff/view/${id}`);
-  }
 
   getCategories(pageNumber: number, nombre?: string): Observable<Tipo[]> {
     let params = new HttpParams().set('pageNumber', pageNumber);
@@ -116,8 +135,8 @@ export class MainService {
     return this.http.get<Usuario[]>(this.baseUrl + `user/view`, {params});
   }
 
-  getStaff(id: string): Observable<Staff> {
-    return this.http.get<Staff>(this.baseUrl + `modelo/view/${id}`);
+  getStaff(id: string): Observable<Staff[]> {
+    return this.http.get<Staff[]>(this.baseUrl + `staff/view/${id}`);
   }
 
 

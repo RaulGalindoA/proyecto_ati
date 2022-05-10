@@ -1,0 +1,28 @@
+<h1> Editar equipo</h1>
+  <div class="flex flex-col">
+    <div class="w-full flex flex-col mb-4">
+        <mat-form-field appearance="outline">
+            <mat-label>Último mantenimiento</mat-label>
+            <input [(ngModel)]="fecha"l matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    </div>
+    <div class="w-full flex flex-col mb-4">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+            <mat-label>Detalle</mat-label>
+            <textarea placeholder="Se rompió la pantalla" [(ngModel)]="detalle" matInput></textarea>
+          </mat-form-field>
+    </div>
+    <div class="flex flex-row justify-between">
+      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="enviar()"
+      >
+        Agregar
+      </button>
+    </div>
+  </div>
