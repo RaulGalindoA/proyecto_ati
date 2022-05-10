@@ -1,0 +1,195 @@
+<div class="px-8 py-2 bg-light-blue h-full">
+    <div class="bg-white p-4 mb-4 mt-4 rounded">
+      <div class="flex md:flex-wrap md:flex-row justify-between flex-col mb-4">
+        <div class="w-1/5 flex flex-col mr-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <mat-select [(ngModel)]="tipoFilter">
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria.id"
+                >{{ categoria.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        
+        <div class="w-1/5 flex flex-col mr-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Modelo</mat-label>
+            <mat-select [(ngModel)]="modeloFilter">
+              <mat-option *ngFor="let modelo of modelos" [value]="modelo.id"
+                >{{ modelo.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-1/5 flex flex-col mr-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Marca</mat-label>
+            <mat-select [(ngModel)]="marcaFilter">
+              <mat-option *ngFor="let marca of marcas" [value]="marca.id"
+                >{{ marca.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-1/5 flex flex-col mr-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Área</mat-label>
+            <mat-select [(ngModel)]="areaFilter">
+              <mat-option *ngFor="let area of areas" [value]="area.id"
+                >{{ area.nombre ? area.nombre : 'Error en el área' }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-col w-1/5 mr-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input [(ngModel)]="nombreFilter" matInput placeholder="Ex. Pantalla rota" />
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-col w-1/5 mr-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Número de serie</mat-label>
+            <input [(ngModel)]="serieFilter" matInput placeholder="Ex. Pantalla rota" />
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-col w-1/5 mr-3">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Seleccione un rango de fechas</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input [(ngModel)]="startFilter" matStartDate placeholder="Fecha inicio">
+              <input [(ngModel)]="endFilter" matEndDate placeholder="Fecha fin">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div
+        class="w-full flex flex-row md:justify-end justify-between items-center"
+      >
+        <div class="mr-4">
+          <button (click)="refreshInfra()" routerLink="/home/infraestructure" mat-raised-button>Limpiar</button>
+        </div>
+        <div class="mr-4">
+          <button (click)="activateFilters()" mat-raised-button class="bg-dark-blue text-white">
+            Buscar
+          </button>
+        </div>
+        
+      </div>
+    </div>
+    <div class="p-4 rounded bg-white overflow-auto">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="num_serie">
+          <th mat-header-cell *matHeaderCellDef>No. de Serie</th>
+          <td mat-cell *matCellDef="let element">{{ element.num_serie }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="ultimo_mant">
+          <th mat-header-cell *matHeaderCellDef>Último Mantenimiento</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.ultimo_mant ? element.ultimo_mant : "Sin registro" }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="detalles">
+          <th mat-header-cell *matHeaderCellDef>Detalles</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.detalles ? element.detalles : "Ningún detalle" }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="capacidad">
+          <th mat-header-cell *matHeaderCellDef>Capacidad/Unidad</th>
+          <td mat-cell *matCellDef="let element">{{ element.capacidad + ' ' + element.unidad }}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="marca">
+          <th mat-header-cell *matHeaderCellDef>Marca</th>
+          <td mat-cell *matCellDef="let element">
+            {{
+              element.modelo[0].marca
+                ? element.modelo[0].marca.nombre
+                : "Sin marca"
+            }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="modelo">
+          <th mat-header-cell *matHeaderCellDef>Modelo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.modelo[0].nombre }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.tipo[0] ? element.tipo[0].nombre : "" }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="area">
+          <th mat-header-cell *matHeaderCellDef>Área</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.area[0] ? element.area[0].nombre : 'Sin área'  }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="flex flex-row justify-center">
+              <div class="mx-2">
+                <button
+                  mat-icon-button
+                  aria-label="Example icon button with a vertical three dot icon"
+                  class="b-editar"
+                  (click)="editInfra(element)"
+                  matTooltip="Editar equipo"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+              <!-- <div class="mx-2">
+                <button
+                  mat-icon-button
+                  aria-label="Example icon button with a vertical three dot icon"
+                  class="b-eliminar"
+                  (click)="deleteInfra(element)"
+                  matTooltip="Eliminar equipo"
+                >
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+              </div> -->
+            </div>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+        ><!-- (click)="editInfra(row)" -->
+        <!-- matTooltip="Editar equipo" -->
+        <!-- matTooltipPosition="above" -->
+        </tr>
+      </table>
+      <mat-paginator
+        [length]="100"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  

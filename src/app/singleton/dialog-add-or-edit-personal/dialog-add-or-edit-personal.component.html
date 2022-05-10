@@ -1,65 +1,192 @@
-<h1>Nuevo personal</h1>
-<div class="flex flex-col">
-  <form (ngSubmit)="submitForm(myForm)" #myForm="ngForm" class="">
-    <div class="w-full flex flex-col my-2">
+<h1>{{ data ? "Nuevo" : "Editar" }} personal</h1>
+<mat-dialog-content class="flex flex-col overflow-auto">
+  <form
+    autocomplete="off"
+    (ngSubmit)="submitForm()"
+    [formGroup]="miFormulario"
+    class=""
+  >
+    <div class="flex flex-row">
+      <div class="w-full flex flex-col mr-3">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input
+            formControlName="nombre"
+            required=""
+            matInput
+            placeholder="Ex. Raúl"
+          />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('nombre') ? 'visible' : 'invisible'"
+        >
+          Este campo es obligatorio
+        </span>
+      </div>
+      <div class="w-full flex flex-col">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <mat-select formControlName="user_id">
+            <mat-option *ngFor="let usuario of usuarios" [value]="usuario.id">
+              {{ usuario.user + " " + usuario.mail }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span
+            class="mb-1 text-red-500"
+            [ngClass]="campoEsValido('user_id') ? 'visible' : 'invisible'"
+          >
+            Este campo es obligatorio
+          </span>
+      </div>
+    </div>
+    <div class="w-full flex flex-row">
+      <div class="flex flex-col w-1/2 mr-3">
+        <mat-form-field class="w-full mr-3 no-padding" appearance="outline">
+          <mat-label>Apellido Paterno</mat-label>
+          <input formControlName="apemat" matInput placeholder="Ex. Galindo" />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('apemat') ? 'visible' : 'invisible'"
+        >
+          Este campo es obligatorio
+        </span>
+      </div>
+      <div class="flex flex-col w-1/2">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Apellido Materno</mat-label>
+          <input formControlName="apepat" matInput placeholder="Ex. Alfonsin" />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('apepat') ? 'visible' : 'invisible'"
+        >
+          Este campo es obligatorio
+        </span>
+      </div>
+    </div>
+    <div class="flex flex-col">
       <mat-form-field class="w-full no-padding" appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input required="" matInput placeholder="Ex. Raúl" />
-      </mat-form-field>
-    </div>
-    <div class="w-full flex flex-row my-2">
-      <mat-form-field class="w-full w-1/2 mr-3 no-padding" appearance="outline">
-        <mat-label>Apellido Paterno</mat-label>
-        <input matInput placeholder="Ex. Galindo" />
-      </mat-form-field>
-      <mat-form-field class="w-full w-1/2 no-padding" appearance="outline">
-        <mat-label>Apellido Materno</mat-label>
-        <input matInput placeholder="Ex. Alfonsin" />
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field class="w-full no-padding my-2" appearance="outline">
         <mat-label>Dirección</mat-label>
         <input
+          formControlName="direccion"
           matInput
           placeholder="Ex. Carretera Veracruz El Tejar Kilómetro 1.5, Granjas Boticaria, 91930 Veracruz"
         />
       </mat-form-field>
+      <span
+        class="mb-1 text-red-500"
+        [ngClass]="campoEsValido('direccion') ? 'visible' : 'invisible'"
+      >
+        Este campo es obligatorio
+      </span>
     </div>
-    <div class="w-full flex flex-row my-2">
-      <mat-form-field class="w-full w-1/2 mr-3 no-padding" appearance="outline">
-        <mat-label>Teléfono</mat-label>
-        <input matInput placeholder="Ex. 2291272733" />
-      </mat-form-field>
-      <mat-form-field class="w-full w-1/2 no-padding" appearance="outline">
-        <mat-label>Mail</mat-label>
-        <input matInput placeholder="Ex. 201860144@ucc.mx" />
-      </mat-form-field>
+    <div class="w-full flex flex-row">
+      <div class="flex flex-col mr-3 w-1/2">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input
+            formControlName="telefono"
+            matInput
+            placeholder="Ex. 2291272733"
+          />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('telefono') ? 'visible' : 'invisible'"
+        >
+          {{ numberErrorMsg ? numberErrorMsg : "&nbsp" }}
+        </span>
+      </div>
+      <div class="flex flex-col mr-3 w-1/2">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Mail</mat-label>
+          <input
+            formControlName="mail"
+            matInput
+            placeholder="Ex. 201860144@ucc.mx"
+          />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('mail') ? 'visible' : 'invisible'"
+        >
+          {{ emailErrorMsg ? emailErrorMsg : "&nbsp" }}
+        </span>
+      </div>
     </div>
-    <div class="w-full flex flex-row my-2">
-      <mat-form-field class="w-full w-1/2 mr-3 no-padding" appearance="outline">
-        <mat-label>Puesto</mat-label>
-        <input matInput placeholder="Ex. Patrón" />
-      </mat-form-field>
-      <mat-form-field class="w-full w-1/2 no-padding" appearance="outline">
-        <mat-label>RFC</mat-label>
-        <input matInput placeholder="Ex. GAAR000518AT5" />
-      </mat-form-field>
+    <div class="w-full flex flex-row">
+      <div class="flex flex-col w-1/2 mr-3">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Puesto</mat-label>
+          <input formControlName="puesto" matInput placeholder="Ex. Patrón" />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('puesto') ? 'visible' : 'invisible'"
+        >
+          Este campo es obligatorio
+        </span>
+      </div>
+      <div class="flex flex-col w-1/2 mr-3">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>RFC</mat-label>
+          <input
+            formControlName="rfc"
+            matInput
+            placeholder="Ex. GAAR000518AT5"
+          />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('rfc') ? 'visible' : 'invisible'"
+        >
+          {{ rfcErrorMsg ? rfcErrorMsg : "&nbsp" }}
+        </span>
+      </div>
     </div>
-    <div class="w-full flex flex-row my-2">
-      <mat-form-field class="w-full w-1/2 mr-3 no-padding" appearance="outline">
-        <mat-label>CURP</mat-label>
-        <input matInput placeholder="Ex. GAAR000518HVZLLLA7" />
-      </mat-form-field>
-      <mat-form-field class="w-full w-1/2 no-padding" appearance="outline">
-        <mat-label>Número de Staff</mat-label>
-        <input matInput placeholder="Ex. 2345" />
-      </mat-form-field>
+    <div class="w-full flex flex-row">
+      <div class="flex flex-col w-1/2 mr-3">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>CURP</mat-label>
+          <input
+            formControlName="curp"
+            matInput
+            placeholder="Ex. GAAR000518HVZLLLA7"
+          />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('curp') ? 'visible' : 'invisible'"
+        >
+          Este campo es obligatorio
+        </span>
+      </div>
+      <div class="flex flex-col w-1/2 mr-3">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Número de Staff</mat-label>
+          <input formControlName="numstaff" matInput placeholder="Ex. 2345" />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('numstaff') ? 'visible' : 'invisible'"
+        >
+          Este campo es obligatorio
+        </span>
+      </div>
     </div>
 
-    <div class="flex flex-row justify-between">
+    <div class="flex flex-row justify-between mt-3">
       <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
-      <button mat-raised-button color="primary" type="submit">Agregar</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        Agregar
+      </button>
     </div>
   </form>
-</div>
+</mat-dialog-content>

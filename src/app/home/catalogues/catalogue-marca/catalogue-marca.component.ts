@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MainService } from '../../../services/main.service';
 import { Marca } from '../../../interfaces/marca';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,6 +6,10 @@ import { DialogAddMarcaComponent } from '../../../singleton/dialog-add-marca/dia
 import { DialogResponseComponent } from '../../../singleton/dialog-response/dialog-response.component';
 import { DialogData } from '../../../interfaces/dialog-data';
 import { DialogConfirmComponent } from '../../../singleton/dialog-confirm/dialog-confirm.component';
+import { AnimationOptions } from 'ngx-lottie';
+import { AnimationItem } from 'lottie-web';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-catalogue-marca',
@@ -14,7 +18,8 @@ import { DialogConfirmComponent } from '../../../singleton/dialog-confirm/dialog
 })
 export class CatalogueMarcaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
-  dataSource!: Marca[];
+  dataSource!: MatTableDataSource<Marca>;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private mainService: MainService, public dialog: MatDialog) {}
 
@@ -23,9 +28,10 @@ export class CatalogueMarcaComponent implements OnInit {
   }
 
   refreshMarcas(){
-    this.mainService.getMarcas().subscribe((resp) => {
-      this.dataSource = resp;
-      console.log(resp)
+    this.mainService.getMarcas(1).subscribe((resp) => {
+      this.dataSource = new MatTableDataSource<Marca>(resp);
+      this.dataSource.paginator = this.paginator
+      this.dataSource.paginator.firstPage();
     });
   }
 
@@ -103,4 +109,23 @@ export class CatalogueMarcaComponent implements OnInit {
       }
     })
   }
+
+  nombre: string = '';
+
+  activateFilters(){
+    console.log(this.nombre);
+    
+    this.mainService.getMarcas(1, this.nombre).subscribe(
+      resp => {
+        this.dataSource = new MatTableDataSource<Marca>(resp);
+        this.dataSource.paginator = this.paginator
+      }
+    )
+  }
+
+  options: AnimationOptions = {
+    path: '/assets/lottie/notfound.json',
+  }
+
+  animationCreated(animationItem: AnimationItem): void {}
 }

@@ -8,7 +8,13 @@ import { CatalogueMarcaComponent } from './catalogue-marca/catalogue-marca.compo
 import { CatalogueModeloComponent } from './catalogue-modelo/catalogue-modelo.component';
 import { MaterialModule } from '../../material/material/material.module';
 import { CatalogueCategoriaComponent } from './catalogue-categoria/catalogue-categoria.component';
+import { FormsModule } from '@angular/forms';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
@@ -21,7 +27,9 @@ import { CatalogueCategoriaComponent } from './catalogue-categoria/catalogue-cat
   imports: [
     CommonModule,
     CataloguesRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ]
 })
 export class CataloguesModule { }

@@ -1,121 +1,202 @@
 <div class="px-8 py-2 bg-light-blue h-full">
-    <div class="bg-white p-4 mb-4 mt-4 rounded">
-        <div class="flex md:flex-row flex-col">
-            <mat-form-field class="w-full" appearance="outline">
-                <mat-label>Filtro 1</mat-label>
-                <input matInput placeholder="Ex. Raul Galindo">
-            </mat-form-field>
-            <mat-form-field class="w-full md:ml-4" appearance="outline">
-                <mat-label>Filtro 2</mat-label>
-                <input matInput placeholder="Ex. Raul Galindo">
-            </mat-form-field>
-            <mat-form-field class="w-full md:ml-4" appearance="outline">
-                <mat-label>Filtro 3</mat-label>
-                <input matInput placeholder="Ex. Raul Galindo">
-            </mat-form-field>
-        </div>
-        <div class="w-full flex flex-row md:justify-end justify-between items-center">
-            <div class="mr-4">
-                <button mat-raised-button>Limpiar</button>
-            </div>
-            <div class="mr-4">
-                <button mat-raised-button class="bg-dark-blue text-white">Buscar</button>
-            </div>
-            <div>
-                <button (click)="newPersonal()" style="background-color: #04B14F;" mat-mini-fab aria-label="Example icon button with a menu icon">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
-        </div>
+  <div class="bg-white p-4 mb-4 mt-4 rounded">
+    <div class="flex md:flex-row justify-start flex-col">
+      <mat-form-field class="w-1/2" appearance="outline">
+        <mat-label>Filtro</mat-label>
+        <input
+          (keyup.enter)="activateFilters()"
+          [(ngModel)]="search"
+          matInput
+          placeholder="Ex. Nombre, Dirección, Teléfono, Mail, Puesto, RFC, CURP, No.Staff"
+        />
+      </mat-form-field>
     </div>
-    <div class="p-4 rounded bg-white">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+    <div
+      class="w-full flex flex-row md:justify-end justify-between items-center"
+    >
+      <div class="mr-4">
+        <button (click)="cleanFilters(); search = ''" mat-raised-button>
+          Limpiar
+        </button>
+      </div>
+      <div class="mr-4">
+        <button
+          mat-raised-button
+          class="bg-dark-blue text-white"
+          (click)="activateFilters()"
+        >
+          Buscar
+        </button>
+      </div>
+      <div>
+        <button
+          (click)="newPersonal()"
+          style="background-color: #04b14f"
+          mat-mini-fab
+          aria-label="Example icon button with a menu icon"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 
-            <ng-container matColumnDef="id">
+  <div class="p-4 rounded bg-white max-w-full">
+    <div
+      class="flex flex-col items-center justify-center w-full"
+      *ngIf="this.dataSource && this.dataSource.data.length == 0"
+    >
+      <h1>No se encontraron resultados con estos filtros</h1>
+      <div class="w-1/3">
+        <ng-lottie
+          [options]="options"
+          (animationCreated)="animationCreated($event)"
+        ></ng-lottie>
+      </div>
+    </div>
+    <div [ngClass]="{ hidden: dataSource && dataSource.data.length == 0 }">
+      <div class="w-full" style="overflow: auto">
+        <table mat-table [dataSource]="dataSource" class="w-full">
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef class="large-cell">Nombre</th>
+            <td mat-cell *matCellDef="let element" class="large-cell">
+              {{
+                element.nombre +
+                  " " +
+                  element.apellido_paterno +
+                  " " +
+                  element.apellido_materno
+              }}
+            </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="apellido_paterno">
+          <th mat-header-cell *matHeaderCellDef class="large-cell">
+            Apellido Paterno
+          </th>
+          <td mat-cell *matCellDef="let element" class="large-cell">
+            {{ element.apellido_paterno }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="apellido_materno">
+          <th mat-header-cell *matHeaderCellDef class="large-cell">
+            Apellido Materno
+          </th>
+          <td mat-cell *matCellDef="let element" class="large-cell">
+            {{ element.apellido_materno }}
+          </td>
+        </ng-container> -->
+
+          <ng-container matColumnDef="direccion">
+            <th mat-header-cell *matHeaderCellDef class="large-cell">
+              Dirección
+            </th>
+            <td mat-cell *matCellDef="let element" class="large-cell">
+              {{ element.direccion }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono" class="medium-cell">
+            <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+            <td mat-cell *matCellDef="let element" class="medium-cell">
+              {{ element.telefono }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="mail">
+            <th mat-header-cell *matHeaderCellDef class="extra-large-cell">
+              Mail
+            </th>
+            <td mat-cell *matCellDef="let element" class="extra-large-cell">
+              {{ element.mail }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="puesto">
+            <th mat-header-cell *matHeaderCellDef class="medium-cell">
+              Puesto
+            </th>
+            <td mat-cell *matCellDef="let element" class="medium-cell">
+              {{ element.puesto }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="rfc">
+            <th mat-header-cell *matHeaderCellDef class="large-cell">RFC</th>
+            <td mat-cell *matCellDef="let element" class="large-cell">
+              {{ element.rfc }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="curp">
+            <th mat-header-cell *matHeaderCellDef class="large-cell">CURP</th>
+            <td mat-cell *matCellDef="let element" class="large-cell">
+              {{ element.curp }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="num_staff">
+            <th mat-header-cell *matHeaderCellDef class="small-cell">
+              No. Staff
+            </th>
+            <td mat-cell *matCellDef="let element" class="small-cell">
+              {{ element.num_staff }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="flex flex-row justify-center">
+                <div class="mx-2">
+                  <button
+                    mat-icon-button
+                    aria-label="Example icon button with a vertical three dot icon"
+                    class="b-editar"
+                    (click)="editPersonal(element)"
+                    matTooltip="Editar personal"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                <div class="mx-2">
+                  <button
+                    mat-icon-button
+                    aria-label="Example icon button with a vertical three dot icon"
+                    class="b-eliminar"
+                    (click)="deletePersonal(element)"
+                    matTooltip="Eliminar equipo"
+                  >
+                    <mat-icon>delete_forever</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> ID </th>
             <td mat-cell *matCellDef="let element">
                 {{ element.id }}
             </td>
-            </ng-container>
-        
-            <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.nombre }}
-            </td>
-            </ng-container>
-        
-            <ng-container matColumnDef="apellido_paterno">
-            <th mat-header-cell *matHeaderCellDef> Apellido Paterno </th>
-            <td mat-cell *matCellDef="let element"> 
-                {{ element.apellido_paterno }}
-            </td>
-            </ng-container>
-        
-            <ng-container matColumnDef="apellido_materno">
-            <th mat-header-cell *matHeaderCellDef> Apellido Materno </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.apellido_materno }}
-            </td>
-            </ng-container>
+            </ng-container> -->
 
-            <ng-container matColumnDef="direccion">
-            <th mat-header-cell *matHeaderCellDef> Dirección </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.direccion }}
-            </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="telefono">
-            <th mat-header-cell *matHeaderCellDef> Teléfono </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.telefono }}
-            </td>
-            </ng-container>
-
-            <ng-container matColumnDef="mail">
-            <th mat-header-cell *matHeaderCellDef> Mail </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.mail }}
-            </td>
-            </ng-container>
-
-            <ng-container matColumnDef="puesto">
-            <th mat-header-cell *matHeaderCellDef> Puesto </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.puesto }}
-            </td>
-            </ng-container>
-
-            <ng-container matColumnDef="rfc">
-            <th mat-header-cell *matHeaderCellDef> RFC </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.rfc }}
-            </td>
-            </ng-container>
-
-            <ng-container matColumnDef="curp">
-            <th mat-header-cell *matHeaderCellDef> CURP </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.curp }}
-            </td>
-            </ng-container>
-
-            <ng-container matColumnDef="num_staff">
-            <th mat-header-cell *matHeaderCellDef> Número de Staff </th>
-            <td mat-cell *matCellDef="let element">
-                {{ element.num_staff }}
-            </td>
-            </ng-container>
-        
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            matTooltip="Editar personal"
+            matTooltipPosition="above"
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+          >
+            <!-- (click)="editPersonal(row)" -->
+          </tr>
         </table>
-        <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-        </mat-paginator>
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 15]"
+        showFirstLastButtons
+      ></mat-paginator>
     </div>
-
+  </div>
 </div>

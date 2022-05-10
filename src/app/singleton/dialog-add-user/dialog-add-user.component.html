@@ -1,0 +1,85 @@
+<h1>{{ data? 'Editar': 'Nuevo' }} usuario</h1>
+<mat-dialog-content class="flex flex-col overflow-auto">
+  <form autocomplete="off" (ngSubmit)="submitForm()" [formGroup]="miFormulario" class="">
+    <div class="w-full flex flex-col ">
+      <mat-form-field class="w-full no-padding" appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input formControlName="user" required="" matInput placeholder="Ex. Raúl" />
+      </mat-form-field>
+      <span
+        class="mb-1 text-red-500"
+        [ngClass]="campoEsValido('user') ? 'visible' : 'invisible'"
+      >
+        Este campo es obligatorio
+      </span>
+    </div>
+    <div class="flex flex-col w-full">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Mail</mat-label>
+          <input formControlName="mail" matInput placeholder="Ex. 201860144@ucc.mx" />
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('mail') ? 'visible' : 'invisible'"
+        >
+          {{ emailErrorMsg ? emailErrorMsg : '&nbsp'  }}
+        </span>
+    </div>
+
+    <div class="flex flex-col w-full">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+            <mat-label>Nivel</mat-label>
+            <mat-select formControlName="nivel">
+              <mat-option
+                *ngFor="let nivel of niveles"
+                [value]="nivel"
+                >{{ nivel }}</mat-option
+              >
+            </mat-select>
+        </mat-form-field>
+        <span
+        class="mb-1 text-red-500"
+        [ngClass]="campoEsValido('nivel') ? 'visible' : 'invisible'"
+        >
+            Este campo es obligatorio
+        </span>
+    </div>
+
+    <div *ngIf="!data" class="w-full flex flex-col ">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input [type]="hide ? 'password' : 'text'" formControlName="password" required="" matInput placeholder="Ex. Raúl" />
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('password') ? 'visible' : 'invisible'"
+        >
+          La contraseña debe ser mayor de 6 carácteres
+        </span>
+    </div>
+
+    <div *ngIf="!data" class="w-full flex flex-col ">
+        <mat-form-field class="w-full no-padding" appearance="outline">
+          <mat-label>Confirmación de Contraseña</mat-label>
+          <input [type]="hide2 ? 'password' : 'text'" formControlName="password2" required="" matInput placeholder="Ex. Raúl" />
+          <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+            <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <span
+          class="mb-1 text-red-500"
+          [ngClass]="campoEsValido('password2') ? 'visible' : 'invisible'"
+        >
+          Las contraseñas no son iguales
+        </span>
+    </div>
+    
+    <div class="flex flex-row justify-between mt-3">
+      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit">Agregar</button>
+    </div>
+  </form>
+</mat-dialog-content>

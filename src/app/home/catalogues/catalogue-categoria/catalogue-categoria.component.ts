@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Categoria } from '../../../interfaces/categoria';
 import { MainService } from '../../../services/main.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,6 +6,10 @@ import { DialogData } from '../../../interfaces/dialog-data';
 import { DialogAddCategoriaComponent } from '../../../singleton/dialog-add-categoria/dialog-add-categoria.component';
 import { DialogResponseComponent } from '../../../singleton/dialog-response/dialog-response.component';
 import { DialogConfirmComponent } from '../../../singleton/dialog-confirm/dialog-confirm.component';
+import { AnimationOptions } from 'ngx-lottie';
+import { AnimationItem } from 'lottie-web';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-catalogue-categoria',
@@ -15,7 +19,8 @@ import { DialogConfirmComponent } from '../../../singleton/dialog-confirm/dialog
 export class CatalogueCategoriaComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
-  dataSource!: Categoria[];
+  dataSource!: MatTableDataSource<Categoria>;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private mainService: MainService, public dialog: MatDialog) { }
 
@@ -24,9 +29,12 @@ export class CatalogueCategoriaComponent implements OnInit {
   }
 
   refreshCategorias(){
-    this.mainService.getCategories().subscribe(
+    this.nombre = '';
+    this.mainService.getCategories(1).subscribe(
       resp => {
-        this.dataSource = resp;
+        this.dataSource = new MatTableDataSource<Categoria>(resp);
+        this.dataSource.paginator = this.paginator
+        this.dataSource.paginator.firstPage();
       }
     )
   }
@@ -105,5 +113,22 @@ export class CatalogueCategoriaComponent implements OnInit {
       }
     })
   }
+
+  nombre: string = '';
+
+  activateFilters(){
+    this.mainService.getCategories(1, this.nombre).subscribe(
+      resp => {
+        this.dataSource = new MatTableDataSource<Categoria>(resp);
+        this.dataSource.paginator = this.paginator
+      }
+    )
+  }
+
+  options: AnimationOptions = {
+    path: '/assets/lottie/notfound.json',
+  }
+
+  animationCreated(animationItem: AnimationItem): void {}
 
 }

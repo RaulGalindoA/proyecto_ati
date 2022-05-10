@@ -27,8 +27,6 @@ export class DialogAddModeloComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data?: Modelo
   ) {}
 
-  nombre: FormControl = this.fb.control('', Validators.required);
-
   miFormulario: FormGroup = this.fb.group({
     nombre: [, [Validators.required, Validators.min(3)]],
     marca:  [, [Validators.required]]
@@ -36,15 +34,15 @@ export class DialogAddModeloComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
-    if (this.data) {
-      this.modelo.id = this.data.id;
-      this.miFormulario.controls['nombre'].setValue(this.data.nombre);
-      this.miFormulario.controls['marca'].setValue(this.data.marca);
-    }
-
-    this.mainService.getMarcas().subscribe(
+    this.mainService.getMarcas(1).subscribe(
       resp => {
         this.marcas = resp;
+        console.log(this.data)
+        if (this.data) {
+          this.modelo.id = this.data.id;
+          this.miFormulario.controls['nombre'].setValue(this.data.nombre);
+          this.miFormulario.controls['marca'].setValue(this.data.marca!.id);
+        }
       }
     )
   }
@@ -57,7 +55,6 @@ export class DialogAddModeloComponent implements OnInit {
   }
 
   guardarModelo() {
-    console.log('guardarmodelo')
     if (this.miFormulario.invalid) return;
 
     this.modelo.nombre = this.miFormulario.controls['nombre'].value;

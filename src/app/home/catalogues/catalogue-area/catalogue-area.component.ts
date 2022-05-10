@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MainService } from '../../../services/main.service';
 import { Area } from '../../../interfaces/area/area';
@@ -6,6 +6,10 @@ import { DialogData } from '../../../interfaces/dialog-data';
 import { DialogAddAreaComponent } from '../../../singleton/dialog-add-area/dialog-add-area.component';
 import { DialogResponseComponent } from '../../../singleton/dialog-response/dialog-response.component';
 import { DialogConfirmComponent } from '../../../singleton/dialog-confirm/dialog-confirm.component';
+import { AnimationOptions } from 'ngx-lottie';
+import { AnimationItem } from 'lottie-web';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-catalogue-area',
@@ -15,7 +19,9 @@ import { DialogConfirmComponent } from '../../../singleton/dialog-confirm/dialog
 export class CatalogueAreaComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
-  dataSource!: Area[];
+
+  dataSource!: MatTableDataSource<Area>;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private mainService: MainService, public dialog: MatDialog) { }
 
@@ -24,12 +30,22 @@ export class CatalogueAreaComponent implements OnInit {
   }
 
   refreshAreas(){
-    this.mainService.getAreas().subscribe(
+    this.nombre = ''
+    this.mainService.getAreas(1).subscribe(
       resp => {
-        this.dataSource = resp;
+        this.dataSource = new MatTableDataSource<Area>(resp);
+        this.dataSource.paginator = this.paginator
+        this.dataSource.paginator.firstPage()
       }
     )
   }
+
+
+  options: AnimationOptions = {
+    path: '/assets/lottie/notfound.json',
+  }
+
+  animationCreated(animationItem: AnimationItem): void {}
 
   newArea() {
     let dialogData: DialogData = {
@@ -83,7 +99,7 @@ export class CatalogueAreaComponent implements OnInit {
   deleteArea( area: Area ) {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       width: '500px',
-      data: `¿Está seguro de que desea eliminar la marca <b>${area.nombre}</b>?` 
+      data: `¿Está seguro de que desea eliminar el área <b>${area.nombre}</b>?` 
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(result)
@@ -92,7 +108,7 @@ export class CatalogueAreaComponent implements OnInit {
           option: 1,
           message: ''
         }
-        this.mainService.deleteMarca( area.id! ).subscribe(
+        this.mainService.deleteArea( area.id! ).subscribe(
           resp => {
             dialogData.message = resp.detail 
             this.dialog.open(DialogResponseComponent, {
@@ -104,6 +120,17 @@ export class CatalogueAreaComponent implements OnInit {
         )
       }
     })
+  }
+
+  nombre: string = '';
+
+  activateFilters(){
+    this.mainService.getAreas(1, this.nombre).subscribe(
+      resp => {
+        this.dataSource = new MatTableDataSource<Area>(resp);
+        this.dataSource.paginator = this.paginator
+      }
+    )
   }
 
 }

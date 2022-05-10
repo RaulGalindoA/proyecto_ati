@@ -1,82 +1,103 @@
-<h1>Nueva infraestructura</h1>
-<div class="flex flex-col">
-  <div class="w-full flex flex-row">
+<h1> {{ data ? 'Editar': 'Nueva' }} infraestructura</h1>
+<form autocomplete="off" (ngSubmit)="submitForm()" [formGroup]="miFormulario" class="">
+<mat-dialog-content class="flex flex-col">
+  <div class="w-full flex flex-col">
     <mat-form-field class="w-full mr-3" appearance="outline">
       <mat-label>Nombre</mat-label>
-      <input matInput placeholder="Ex. Congelador Industrial" />
+      <input formControlName="nombre" matInput placeholder="Ex. Congelador Industrial" />
     </mat-form-field>
   </div>
 
-  <div class="w-full flex flex-row">
+  <div class="w-full flex flex-col">
     <mat-form-field class="w-full" appearance="outline">
-        <mat-label>Encargado</mat-label>
-        <mat-select>
-          <mat-option
-            *ngFor="let staff of staffs"
-            value="{{ staff.id }}"
-            >{{ staff.nombre }}
-            </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <mat-label>Número de serie</mat-label>
+      <input formControlName="num_serie" matInput placeholder="Ex. LC-32LD1704" />
+    </mat-form-field>
   </div>
 
-  <div class="w-full">
+  <div class="flex flex-row w-full">
+    <div class="w-full flex flex-col w-1/2 mr-3">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Capacidad</mat-label>
+        <input formControlName="capacidad" matInput placeholder="Ex. 60" />
+      </mat-form-field>
+    </div>
+    <div class="w-full flex flex-col w-1/2">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Unidad</mat-label>
+        <input formControlName="unidad" matInput placeholder="Ex. HZ" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-col">
     <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Tipo de infraestructura</mat-label>
-      <mat-select>
+      <mat-label>Categoría</mat-label>
+      <mat-select formControlName="categoria">
         <mat-option
-          *ngFor="let area of areas"
-          value="{{ area.id }}"
-          >{{ area.nombre }}</mat-option
+          *ngFor="let categoria of categorias"
+          [value]="categoria.id"
+          >{{ categoria.nombre }}</mat-option
         >
       </mat-select>
     </mat-form-field>
   </div>
 
   <div class="w-full flex flex-row">
-    <div class="w-1/2 mr-3">
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label>Modelo</mat-label>
-        <mat-select>
-          <mat-option
-            *ngFor="let modelo of modelos"
-            value="{{ modelo.id }}"
-            >{{ modelo.nombre }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="w-1/2">
+    <div class="w-1/2 mr-3 flex flex-col">
       <mat-form-field class="w-full" appearance="outline">
         <mat-label>Marca</mat-label>
-        <mat-select>
-          <mat-option
-            *ngFor="let marca of marcas"
-            value="{{ marca.id }}"
-            >{{ marca.nombre }}</mat-option
-          >
+        <mat-select (selectionChange)="onChange($event)" formControlName="marca">
+          <mat-option *ngFor="let marca of marcas" [value]="marca.id">{{
+            marca.nombre
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="w-1/2 flex flex-col">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Modelo</mat-label>
+        <mat-select formControlName="modelo">
+          <mat-option *ngFor="let modelo of modelos" [value]="modelo.id">{{
+            modelo.nombre
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
   </div>
 
-  <div class="w-full">
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Número de serie</mat-label>
-      <input matInput placeholder="Ex. LC-32LD1704" />
-    </mat-form-field>
-  </div>
-
-  <div class="w-full">
+  <div class="w-full flex flex-col">
     <mat-form-field class="w-full" appearance="outline">
       <mat-label>Detalles</mat-label>
-      <input matInput placeholder="Ex. Pantalla rota" />
+      <input formControlName="detalles" matInput placeholder="Ex. Pantalla rota" />
     </mat-form-field>
   </div>
 
-  <div class="flex flex-row justify-between" >
-      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
-      <button mat-raised-button color="primary">Agregar</button>
+  <div class="w-full flex flex-col">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Área</mat-label>
+      <mat-select formControlName="area">
+        <mat-option *ngFor="let area of areas" [value]="area.id"
+          >{{ area.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
-</div>
+  <div class="w-full flex flex-col">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Encargado</mat-label>
+      <mat-select formControlName="staff">
+        <mat-option *ngFor="let staff of staffs" [value]="staff.id"
+          >{{ staff.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="flex flex-row justify-between">
+    <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+    <button mat-raised-button color="primary">Agregar</button>
+  </div>
+</mat-dialog-content>
+</form>

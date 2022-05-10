@@ -10,6 +10,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { UsersComponent } from './users/users.component';
+import { FormsModule } from '@angular/forms';
+import { MisEquiposComponent } from './mis-equipos/mis-equipos.component';
 
 
 export function playerFactory() {
@@ -22,13 +25,16 @@ export function playerFactory() {
     InfraestructureComponent,
     PersonalComponent,
     WelcomeComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    UsersComponent,
+    MisEquiposComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule, 
     MaterialModule,
     LottieModule.forRoot({ player: playerFactory }),
+    FormsModule
   ]
 })
 export class HomeModule { }

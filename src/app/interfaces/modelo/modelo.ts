@@ -1,8 +1,9 @@
 import { ModeloPivot } from './modelo-pivot';
+import { Marca } from '../marca';
 export interface Modelo {
     id?:     number;
-    marca?: number;
-    nombre: string;
+    marca?:  Marca;
+    nombre:  string;
     pivot?:  ModeloPivot;
     active?: boolean;
 }

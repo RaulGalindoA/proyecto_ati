@@ -1,69 +1,181 @@
 <div class="h-screen max-h-full">
-<mat-toolbar>
+  <mat-toolbar>
     <div class="flex flex-row w-full">
-        <div class="flex flex-row">
-            <button [routerLink]="['/home/personal']" matTooltip="Personal" mat-button color="primary">
-                <mat-icon aria-hidden="false" aria-label="Example home icon">groups</mat-icon>
-            </button>
-            <button [matMenuTriggerFor]="menu" matTooltip="Infraestructura" mat-button color="primary">
-                <mat-icon aria-hidden="false" aria-label="Example home icon">apartment</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" class="flex flex-col">
-                <button class="align-middle" [routerLink]="['/home/infraestructure']" [queryParams]="{ electrical : true}" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">bolt</mat-icon>
-                    Red eléctrica
-                </button>
-                <button class="align-middle" [routerLink]="['/home/infraestructure']" [queryParams]="{ network : true}" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">share</mat-icon>
-                    Red de datos
-                </button>
-                <button class="align-middle" [routerLink]="['/home/infraestructure']" [queryParams]="{ cooling : true}" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">heat_pump</mat-icon>
-                    Sistema de enfriamiento
-                </button>
-                <button class="align-middle" [routerLink]="['/home/infraestructure']" [queryParams]="{ hardware : true}" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">desktop_windows</mat-icon>
-                    Hardware
-                </button>
-                <button class="align-middle" [routerLink]="['/home/infraestructure']" [queryParams]="{ software : true}" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">
-                        terminal
-                    </mat-icon>
-                    Software
-                </button>
-                <button class="align-middle" [routerLink]="['/home/infraestructure']" [queryParams]="{ extinguisher : true}" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">fire_extinguisher</mat-icon>
-                    Sistema de extintores
-                </button>
-            </mat-menu>
-            <button [routerLink]="['/home/catalogues']" matTooltip="Catálogos" mat-button color="primary">
-                <mat-icon aria-hidden="false" aria-label="Example home icon">library_books</mat-icon>
-            </button>
-            
-        </div>
-        <div class="ml-auto flex flex-row items-center justify-center">
-            <div class="mr-3">
-                <button matTooltip="Configuración" mat-button color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">settings</mat-icon>
-                </button>
-            </div>
-            <a [matMenuTriggerFor]="menu2" matTooltip="Infraestructura" mat-raised-button color="primary">
-                <mat-icon class="mat-icon-16" aria-hidden="false" aria-label="Example home icon">face</mat-icon>
-                Nombre del Usuario
-            </a>
-            <mat-menu #menu2="matMenu" class="flex flex-col">
-                <button class="align-middle" [routerLink]="['/home/profile']" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
-                    Mi perfil
-                </button>
-                <button class="align-middle" [routerLink]="['/']" mat-menu-item color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">logout</mat-icon>
-                    Cerrar sesión
-                </button>
-            </mat-menu>
-        </div>
+      <div class="flex flex-row">
+        <button *ngIf="admin"
+          [routerLink]="['/home/users']"
+          matTooltip="Usuarios"
+          mat-button
+          color="primary"
+        >
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            >supervisor_account</mat-icon
+          >
+        </button>
+        <button *ngIf="admin"
+          [routerLink]="['/home/personal']"
+          matTooltip="Personal"
+          mat-button
+          color="primary"
+        >
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            >groups</mat-icon
+          >
+        </button>
+        <button *ngIf="admin"
+          [matMenuTriggerFor]="menu"
+          matTooltip="Infraestructura"
+          mat-button
+          color="primary"
+        >
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            >apartment</mat-icon
+          >
+        </button>
+        <mat-menu #menu="matMenu" class="flex flex-col">
+          <button
+            class="align-middle"
+            [routerLink]="['/home/infraestructure']"
+            [queryParams]="{ type : 'electrical' }"
+            mat-menu-item
+            color="primary"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >bolt</mat-icon
+            >
+            Red eléctrica
+          </button>
+          <button
+            class="align-middle"
+            [routerLink]="['/home/infraestructure']"
+            [queryParams]="{ type : 'network' }"
+            mat-menu-item
+            color="primary"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >share</mat-icon
+            >
+            Red de datos
+          </button>
+          <button
+            class="align-middle"
+            [routerLink]="['/home/infraestructure']"
+            [queryParams]="{ type : 'cooling' }"
+            mat-menu-item
+            color="primary"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >heat_pump</mat-icon
+            >
+            Sistema de enfriamiento
+          </button>
+          <button
+            class="align-middle"
+            [routerLink]="['/home/infraestructure']"
+            [queryParams]="{ type : 'hardware' }"
+            mat-menu-item
+            color="primary"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >desktop_windows</mat-icon
+            >
+            Hardware
+          </button>
+          <button
+            class="align-middle"
+            [routerLink]="['/home/infraestructure']"
+            [queryParams]="{ type : 'software' }"
+            mat-menu-item
+            color="primary"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon">
+              terminal
+            </mat-icon>
+            Software
+          </button>
+          <button
+            class="align-middle"
+            [routerLink]="['/home/infraestructure']"
+            [queryParams]="{ type : 'extinguisher' }"
+            mat-menu-item
+            color="primary"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >fire_extinguisher</mat-icon
+            >
+            Sistema de extintores
+          </button>
+        </mat-menu>
+        <button *ngIf="admin"
+          [routerLink]="['/home/catalogues']"
+          matTooltip="Catálogos"
+          mat-button
+          color="primary"
+        >
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            >library_books</mat-icon
+          >
+        </button>
+        <button *ngIf="!admin"
+          [routerLink]="['/home/mis_equipos']"
+          matTooltip="Mis equipos"
+          mat-button
+          color="primary"
+        >
+          <mat-icon aria-hidden="false" aria-label="Example home icon"
+            >devices</mat-icon
+          >
+        </button>
+      </div>
+      <div class="ml-auto flex flex-row items-center justify-center">
+        <!-- <div class="mr-3">
+          <button matTooltip="Configuración" mat-button color="primary">
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >settings</mat-icon
+            >
+          </button>
+        </div> -->
+        <a
+          class="w-full"
+          [matMenuTriggerFor]="menu2"
+          matTooltip="Infraestructura"
+          mat-raised-button
+          color="primary"
+        >
+          <mat-icon
+            class="mat-icon-16"
+            aria-hidden="false"
+            aria-label="Example home icon"
+            >face</mat-icon
+          >
+          {{ nombre }}
+        </a>
+        <mat-menu #menu2="matMenu" class="flex flex-col">
+          <button
+            class="align-middle"
+            [routerLink]="['/home/profile']"
+            mat-menu-item
+            color="primary"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >account_circle</mat-icon
+            >
+            Mi perfil
+          </button>
+          <button
+            class="align-middle"
+            mat-menu-item
+            color="primary"
+            (click)="cierraSesion()"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >logout</mat-icon
+            >
+            Cerrar sesión
+          </button>
+        </mat-menu>
+      </div>
     </div>
-    
-</mat-toolbar>
-<router-outlet></router-outlet>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
 </div>

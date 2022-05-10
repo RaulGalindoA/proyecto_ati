@@ -1,7 +1,10 @@
 import { StaffPivot } from './staff-pivot';
+import { Usuario } from '../usuario';
 export interface Staff {
+  id?: number;
   pivot?: StaffPivot;
-  id: number;
+  user_id?: number;
+  user?: Usuario
   nombre: string;
   apellido_paterno?: string;
   apellido_materno?: string;
@@ -12,4 +15,5 @@ export interface Staff {
   rfc?: string;
   curp?: string;
   num_staff?: string;
+  active?: boolean;
 }

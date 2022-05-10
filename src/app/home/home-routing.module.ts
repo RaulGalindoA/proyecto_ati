@@ -5,6 +5,8 @@ import { InfraestructureComponent } from './infraestructure/infraestructure.comp
 import { PersonalComponent } from './personal/personal.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { UsersComponent } from './users/users.component';
+import { MisEquiposComponent } from './mis-equipos/mis-equipos.component';
 
 const routes: Routes = [
   {
@@ -30,6 +32,14 @@ const routes: Routes = [
       {
         path: 'profile',
         component: MyProfileComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
+      },
+      {
+        path: 'mis_equipos',
+        component: MisEquiposComponent
       },
       {
         path: '',

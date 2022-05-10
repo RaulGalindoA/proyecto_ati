@@ -1,0 +1,121 @@
+<div class="px-8 py-2 bg-light-blue h-full">
+    <div class="bg-white p-4 mb-4 mt-4 rounded">
+        <div class="flex md:flex-row flex-col">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Nivel</mat-label>
+                <mat-select [(ngModel)]="nivel">
+                  <mat-option *ngFor="let level of niveles" [value]="level"
+                    >{{ level }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field class="w-full md:ml-4" appearance="outline">
+                <mat-label>Mail</mat-label>
+                <input [(ngModel)]="mail" matInput placeholder="Ex. 201860144@ucc.mx">
+            </mat-form-field>
+        </div>
+        <div class="w-full flex flex-row md:justify-end justify-between items-center">
+            <div class="mr-4">
+                <button (click)="cleanFields()" mat-raised-button>Limpiar</button>
+            </div>
+            <div class="mr-4">
+                <button (click)="activateFilters()" mat-raised-button class="bg-dark-blue text-white">Buscar</button>
+            </div>
+            <div>
+                <button (click)="newUser()" style="background-color: #04B14F;" mat-mini-fab aria-label="Example icon button with a menu icon">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="p-4 rounded bg-white">
+      <div class="flex flex-col items-center justify-center w-full" *ngIf="this.dataSource && this.dataSource.data.length == 0">
+        <h1>No se encontraron resultados con estos filtros</h1>
+        <div class="w-1/3">
+          <ng-lottie
+          [options]="options"
+          (animationCreated)="animationCreated($event)"
+          ></ng-lottie>
+        </div>
+      </div>
+      <div [ngClass]="{'hidden': dataSource && dataSource.data.length == 0}">
+        <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+
+            <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.id }}
+            </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.user }}
+            </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="mail">
+            <th mat-header-cell *matHeaderCellDef> Mail </th>
+            <td mat-cell *matCellDef="let element"> 
+                {{ element.mail }}
+            </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="nivel">
+            <th mat-header-cell *matHeaderCellDef> Nivel </th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.nivel }}
+            </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="flex flex-row justify-center">
+                    <div class="mx-2">
+                      <button
+                        mat-icon-button
+                        aria-label="Example icon button with a vertical three dot icon"
+                        class="b-editar"
+                        (click)="editUser(element)"
+                        matTooltip="Editar usuario"
+                      >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                    <div class="mx-2">
+                      <button
+                        mat-icon-button
+                        aria-label="Example icon button with a vertical three dot icon"
+                        class="b-eliminar"
+                        (click)="deleteUser(element)"
+                        matTooltip="Eliminar usuario"
+                      >
+                        <mat-icon>delete_forever</mat-icon>
+                      </button>
+                    </div>
+                    <div class="mx-2">
+                      <button
+                        mat-icon-button
+                        aria-label="Example icon button with a vertical three dot icon"
+                        class="b-editar"
+                        (click)="changePass(element)"
+                        matTooltip="Cambiar contraseña"
+                      >
+                        <mat-icon>password</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+            </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+
+</div>

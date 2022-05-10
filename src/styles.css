@@ -72,18 +72,20 @@ mat-form-field.no-padding .mat-form-field-wrapper {
   padding: 0;
 }
 
-input.ng-invalid.ng-touched {
-  border: 1px solid red;
+.extra-large-cell {
+  min-width: 250px;
 }
 
-.mat-select.ng-invalid.ng-touched {
-  border: 1px solid red;
+.large-cell{
+  min-width: 120px;
+  max-width: 200px;
 }
 
-form.submitted .ng-invalid {
-  border: 1px solid #f00;
+.medium-cell{
+  min-width: 90px;
 }
 
-.form-control.ng-valid {
-  border-color: #ccc !important;
+.small-cell{
+  min-width: 60px;
 }
+

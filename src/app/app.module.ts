@@ -19,6 +19,8 @@ import { DialogConfirmComponent } from './singleton/dialog-confirm/dialog-confir
 import { DialogAddAreaComponent } from './singleton/dialog-add-area/dialog-add-area.component';
 import { DialogAddModeloComponent } from './singleton/dialog-add-modelo/dialog-add-modelo.component';
 import { DialogAddCategoriaComponent } from './singleton/dialog-add-categoria/dialog-add-categoria.component';
+import { DialogAddUserComponent } from './singleton/dialog-add-user/dialog-add-user.component';
+import { DialogEditPasswordComponent } from './singleton/dialog-edit-password/dialog-edit-password.component';
 
 export function playerFactory() {
   return player;
@@ -37,6 +39,8 @@ export function playerFactory() {
     DialogAddAreaComponent,
     DialogAddModeloComponent,
     DialogAddCategoriaComponent,
+    DialogAddUserComponent,
+    DialogEditPasswordComponent,
   ],
   imports: [
     BrowserModule,
