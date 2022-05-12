@@ -137,8 +137,8 @@ export class DialogAddOrEditPersonalComponent implements OnInit {
     return ''
   }
 
-  getCurpMsg(): string{
-    const errors = this.miFormulario.get('rfc')?.errors;
+  get curpErrorMsg(): string{
+    const errors = this.miFormulario.get('curp')?.errors;
     if ( errors?.['required'] ){
       return 'CURP es obligatorio'
     } else if (errors?.['minlength']) {

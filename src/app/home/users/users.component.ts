@@ -49,8 +49,15 @@ export class UsersComponent implements OnInit {
             data: dialogData
           });
           this.refreshUsers();
+        } else {
+          dialogData.message = result.detail.mail[0];
+          dialogData.option = 2
+          this.dialog.open(DialogResponseComponent, {
+            width: '500px',
+            data: dialogData
+          });
         }
-      }
+      } 
       console.log('resultado')
       console.log(result);
     });
@@ -93,6 +100,8 @@ export class UsersComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if ( result ) {
+        console.log('resultado del dialogo')
+        console.log(result)
         if ( result.done == true ){
           dialogData.message = result.detail;
           this.dialog.open(DialogResponseComponent, {
@@ -101,14 +110,15 @@ export class UsersComponent implements OnInit {
           });
           this.refreshUsers();
         } else {
-          dialogData.message = result.detail.email;
+          dialogData.message = result.detail.mail[0];
+          dialogData.option = 2
           this.dialog.open(DialogResponseComponent, {
             width: '500px',
             data: dialogData
           });
-          this.refreshUsers();
         }
-      }
+        
+      } 
       console.log('resultado')
       console.log(result);
     });

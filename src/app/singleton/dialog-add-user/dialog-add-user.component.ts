@@ -82,10 +82,18 @@ export class DialogAddUserComponent implements OnInit {
         this.usuario.password = this.miFormulario.get('password')?.value;
 
         this.mainService.register(this.usuario).subscribe(
-          resp => {
-            console.log(resp)
-            this.cerrar(resp);
+          {
+            next: x => {
+              this.cerrar(x)
+            },
+            error: x => {
+              this.cerrar(x.error)
+            }
           }
+          // resp => {
+          //   console.log(resp)
+          //   this.cerrar(resp);
+          // }
         )
 
       }

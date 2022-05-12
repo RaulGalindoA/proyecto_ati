@@ -18,11 +18,10 @@ export class MyProfileComponent implements OnInit {
   constructor(private mainService: MainService, private localService: LocalService) { }
 
   ngOnInit(): void {
-    this.mainService.getStaff( this.localService.getJsonValue('token').user.id ).subscribe(
+    this.mainService.getStaffByUserId( this.localService.getJsonValue('token').user.id ).subscribe(
       resp => {
+        console.log(resp)
         this.staff = resp[0]
-        this.nivel = resp[0].user?.nivel!
-        console.log(resp[0]);
       }
     )
   }

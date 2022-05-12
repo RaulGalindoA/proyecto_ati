@@ -1,13 +1,13 @@
 <div class="p-8 bg-light-blue pl-5 text-white text-xl font-medium	">
     Mi perfil
 </div>
-<div class="flex flex-col justify-center items-center md:px-32 md:pt-16">
-    <div class="text-3xl font-medium w-full text-left">
+<div class="flex flex-col justify-center items-center md:px-32 md:pt-4 mt-4">
+    <div class="text-3xl font-medium w-full text-left px-3">
         Datos personales:
     </div>
-    <div *ngIf="!staff">
+    <div class="mt-4 px-3 flex flex-col justify-center items-center" *ngIf="!staff">
         <h1>Este usuario no ha sido asignado a ningún personal. Favor de comunicarse con el administrador del sistema.</h1>
-      <div class="w-1/2">
+      <div class="w-1/3">
         <ng-lottie
           [options]="options"
           (animationCreated)="animationCreated($event)"
@@ -15,83 +15,85 @@
       </div>
     </div>
     <div *ngIf="staff" class="flex flex-row flex-wrap mt-4 font-regular text-xl w-full">
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
                 Nombre:
             </div>
-            <div class="w-1/2">
+            <div class="w-full">
                 {{ staff.nombre }}
             </div>
         </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
                 Apellido Paterno:
             </div>
-            <div class="w-1/2">
+            <div class="w-full">
                 {{ staff.apellido_paterno }}
             </div>
         </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
                 Apellido Materno:
             </div>
-            <div class="w-1/2">
+            <div class="w-full">
                 {{ staff.apellido_materno }}
             </div>
         </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
                 CURP:
             </div>
-            <div class="w-1/2">
+            <div class="w-full">
                 {{ staff.curp }}
             </div>
         </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
-                Dirección:
-            </div>
-            <div class="w-1/2">
-                {{ staff.direccion }}
-            </div>
-        </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
-                Número de Staff:
-            </div>
-            <div class="w-1/2">
-                {{ staff.num_staff }}
-            </div>
-        </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
-                Puesto:
-            </div>
-            <div class="w-1/2">
-                {{ staff.puesto }}
-            </div>
-        </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
                 RFC:
             </div>
-            <div class="w-1/2">
+            <div class="w-full">
                 {{ staff.rfc }}
             </div>
         </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
                 Número de Teléfono:
             </div>
-            <div class="w-1/2">
+            <div class="w-full">
                 {{ staff.telefono }}
             </div>
         </div>
-        <div class="flex flex-row w-1/3 mt-8">
-            <div class="w-1/2 font-medium">
+        <div class="flex flex-col w-full mt-8 px-3">
+            <div class="w-full font-medium">
+                Dirección:
+            </div>
+            <div class="w-full">
+                {{ staff.direccion }}
+            </div>
+        </div>
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
+                Número de Staff:
+            </div>
+            <div class="w-full">
+                {{ staff.num_staff }}
+            </div>
+        </div>
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
+                Puesto:
+            </div>
+            <div class="w-full">
+                {{ staff.puesto }}
+            </div>
+        </div>
+        
+        
+        <div class="flex flex-col w-1/3 mt-8 px-3">
+            <div class="w-full font-medium">
                 Tipo de Usuario:
             </div>
-            <div class="w-1/2">
+            <div class="w-full">
                 {{ nivel }}
             </div>
         </div>

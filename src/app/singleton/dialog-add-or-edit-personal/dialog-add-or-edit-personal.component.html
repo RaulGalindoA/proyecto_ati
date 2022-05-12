@@ -6,7 +6,7 @@
     [formGroup]="miFormulario"
     class=""
   >
-    <div class="flex flex-row">
+    <div class="flex md:flex-row flex-col">
       <div class="w-full flex flex-col mr-3">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>Nombre</mat-label>
@@ -41,8 +41,8 @@
           </span>
       </div>
     </div>
-    <div class="w-full flex flex-row">
-      <div class="flex flex-col w-1/2 mr-3">
+    <div class="w-full flex md:flex-row flex-col">
+      <div class="flex flex-col md:w-1/2 w-full mr-3">
         <mat-form-field class="w-full mr-3 no-padding" appearance="outline">
           <mat-label>Apellido Paterno</mat-label>
           <input formControlName="apemat" matInput placeholder="Ex. Galindo" />
@@ -54,7 +54,7 @@
           Este campo es obligatorio
         </span>
       </div>
-      <div class="flex flex-col w-1/2">
+      <div class="flex flex-col md:w-1/2 w-full">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>Apellido Materno</mat-label>
           <input formControlName="apepat" matInput placeholder="Ex. Alfonsin" />
@@ -83,8 +83,8 @@
         Este campo es obligatorio
       </span>
     </div>
-    <div class="w-full flex flex-row">
-      <div class="flex flex-col mr-3 w-1/2">
+    <div class="w-full flex md:flex-row flex-col">
+      <div class="flex flex-col mr-3 md:w-1/2 w-full">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>Teléfono</mat-label>
           <input
@@ -100,7 +100,7 @@
           {{ numberErrorMsg ? numberErrorMsg : "&nbsp" }}
         </span>
       </div>
-      <div class="flex flex-col mr-3 w-1/2">
+      <div class="flex flex-col mr-3 md:w-1/2 w-full">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>Mail</mat-label>
           <input
@@ -117,8 +117,8 @@
         </span>
       </div>
     </div>
-    <div class="w-full flex flex-row">
-      <div class="flex flex-col w-1/2 mr-3">
+    <div class="w-full flex md:flex-row flex-col">
+      <div class="flex flex-col md:w-1/2 w-full mr-3">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>Puesto</mat-label>
           <input formControlName="puesto" matInput placeholder="Ex. Patrón" />
@@ -130,7 +130,7 @@
           Este campo es obligatorio
         </span>
       </div>
-      <div class="flex flex-col w-1/2 mr-3">
+      <div class="flex flex-col md:w-1/2 w-full mr-3">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>RFC</mat-label>
           <input
@@ -147,8 +147,8 @@
         </span>
       </div>
     </div>
-    <div class="w-full flex flex-row">
-      <div class="flex flex-col w-1/2 mr-3">
+    <div class="w-full flex md:flex-row flex-col">
+      <div class="flex flex-col md:w-1/2 w-full mr-3">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>CURP</mat-label>
           <input
@@ -161,10 +161,10 @@
           class="mb-1 text-red-500"
           [ngClass]="campoEsValido('curp') ? 'visible' : 'invisible'"
         >
-        {{ getCurpMsg ? getCurpMsg : "&nbsp" }}
+        {{ curpErrorMsg ? curpErrorMsg : "&nbsp" }}
       </span>
       </div>
-      <div class="flex flex-col w-1/2 mr-3">
+      <div class="flex flex-col md:w-1/2 w-full mr-3">
         <mat-form-field class="w-full no-padding" appearance="outline">
           <mat-label>Número de Staff</mat-label>
           <input formControlName="numstaff" matInput placeholder="Ex. 2345" />

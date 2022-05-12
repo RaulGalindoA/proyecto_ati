@@ -270,6 +270,10 @@ export class MainService {
     return this.http.put<ApiResponse>(this.baseUrl + `infra/staff/edit/${id}`, equipo);
   }
 
+  getStaffByUserId( id:string ): Observable<Staff[]> {
+    return this.http.get<Staff[]>(this.baseUrl + `staff/user/${id}`);
+  }
+
   register(usuario: Usuario): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.baseUrl + `register`, usuario);
   }

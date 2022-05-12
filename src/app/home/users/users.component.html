@@ -1,4 +1,4 @@
-<div class="px-8 py-2 bg-light-blue h-full">
+<div class="px-8 py-2 bg-light-blue min-h-screen">
     <div class="bg-white p-4 mb-4 mt-4 rounded">
         <div class="flex md:flex-row flex-col">
             <mat-form-field class="w-full" appearance="outline">
@@ -39,40 +39,41 @@
           ></ng-lottie>
         </div>
       </div>
-      <div [ngClass]="{'hidden': dataSource && dataSource.data.length == 0}">
+      <div class="w-full" [ngClass]="{'hidden': dataSource && dataSource.data.length == 0}">
+        <div class="overflow-auto">
         <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
 
             <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef class="small-cell"> ID </th>
+            <td mat-cell *matCellDef="let element" class="small-cell">
                 {{ element.id }}
             </td>
             </ng-container>
         
             <ng-container matColumnDef="usuario">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef class="large-cell"> Nombre </th>
+            <td mat-cell *matCellDef="let element" class="large-cell">
                 {{ element.user }}
             </td>
             </ng-container>
         
-            <ng-container matColumnDef="mail">
-            <th mat-header-cell *matHeaderCellDef> Mail </th>
-            <td mat-cell *matCellDef="let element"> 
+            <ng-container matColumnDef="mail" sticky>
+            <th mat-header-cell *matHeaderCellDef class="large-cell"> Mail </th>
+            <td mat-cell *matCellDef="let element" class="large-cell"> 
                 {{ element.mail }}
             </td>
             </ng-container>
         
             <ng-container matColumnDef="nivel">
-            <th mat-header-cell *matHeaderCellDef> Nivel </th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef class="large-cell"> Nivel </th>
+            <td mat-cell *matCellDef="let element" class="large-cell">
                 {{ element.nivel }}
             </td>
             </ng-container>
 
             <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef> Acciones </th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef class="large-cell"> Acciones </th>
+            <td mat-cell *matCellDef="let element" class="large-cell">
                 <div class="flex flex-row justify-center">
                     <div class="mx-2">
                       <button
@@ -114,6 +115,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+      </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
       </div>
     </div>

@@ -63,6 +63,26 @@ export class MisEquiposComponent implements OnInit {
     console.log(this.id)
     console.log(this.token)
     this.refreshInfra()
+    this.mainService.getMarcas(1).subscribe(
+      resp => {
+        this.marcas = resp;
+      }
+    )
+    this.mainService.getAreas(1).subscribe(
+      resp => {
+        this.areas = resp;
+      }
+    )
+    this.mainService.getModelos(1).subscribe(
+      resp => {
+        this.modelos = resp;
+      }
+    )
+    this.mainService.getCategories(1).subscribe(
+      resp => {
+        this.categorias = resp;
+      }
+    )
   }
 
   activateFilters() {
@@ -97,7 +117,14 @@ export class MisEquiposComponent implements OnInit {
   }
 
   cleanFilters() {
-
+    this.modeloFilter  = 0
+    this.marcaFilter   = 0
+    this.tipoFilter    = 0
+    this.areaFilter    = 0
+    this.nombreFilter  = ''
+    this.serieFilter   = ''
+    this.startFilter   = ''
+    this.endFilter     = ''
   }
 
   refreshInfra(){
